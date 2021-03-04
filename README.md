@@ -1,2 +1,2 @@
-# WindFlutterPy
-Python package to assess wind-related flutter instabilites in structures. It provides a tolbox to agilise the postprocessing of wind tunnel tests or computational simulations results and obtain the flutter derivatives.
+# WindFluPy
+Python package for the evaluation of wind-induced flutter effects in structures. It provides a toolbox to speed up the post-processing of wind tunnel tests or computational simulations results and obtain the flutter derivatives.
