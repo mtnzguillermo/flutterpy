@@ -1,2 +1,3 @@
 
-import flutterpy.derivatives.flutter_derivatives
+from .flutter_derivatives import *
+from .independent_functions import *
