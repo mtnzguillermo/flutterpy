@@ -2,7 +2,7 @@
 import numpy as np
 import warnings
 
-import flutterpy.utilities.sinusoidal_utilities as util
+import utilities.sinusoidal_utilities as util
 
 
 # Main object to manage flutter derivatives data
