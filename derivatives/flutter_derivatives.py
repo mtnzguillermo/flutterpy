@@ -291,7 +291,7 @@ class FlutterDerivatives():
         # m4       c*B      *    2/(dens*U^2*B*ampl)   *     1/B     *      1
         # m5    b*U/omega   *    2/(dens*U^2*B*ampl)   *     1/B     *     1/B
         # m6       c*B      *    2/(dens*U^2*B*ampl)   *     1/B     *     1/B
-        f0 = 2/(sim_params['air_dens']*sim_params['U']**2*sim_params['B']**2*motion_ampl)
+        f0 = 2/(sim_params['fluid_dens']*sim_params['U']**2*sim_params['B']**2*motion_ampl)
         if m_name == 'pitch':
             f1= 1/sim_params['B']
         else:
