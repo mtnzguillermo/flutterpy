@@ -18,6 +18,10 @@ class FlutterDerivatives():
         # Initializing dictionary with the derivatives' data
         self.reset_all_derivatives()
 
+        # Other class variables needed
+        self.sim_param_keys = ['U', 'B', 'delta_t', 'fluid_dens']
+        self.default_sim_params = {}
+
 
     ########## USER METHODS
 
@@ -61,22 +65,13 @@ class FlutterDerivatives():
         self.default_notation = new_notation
 
     
-    def set_default_parameters(self, U=None, B=None, delta_t=None, air_dens=None):
+    def set_default_parameters(self, **kwargs):
 
         # TODO: check input format
-        # Maybe also use **kwargs instead
 
-        if U != None:
-            self.U = U
-        
-        if B != None:
-            self.B = B
-        
-        if delta_t != None:
-            self.delta_t = delta_t
-
-        if air_dens != None:
-            self.air_dens = air_dens
+        for param in self.sim_param_keys:
+            if param in kwargs:
+                self.default_sim_params[param] = kwargs[param]
 
     
     def calculate_derivatives_from_forced_motion(self, **kwargs):
@@ -237,42 +232,21 @@ class FlutterDerivatives():
         msg = 'The variable "{}" has no default value. It is necessary '
         msg += 'to provide a particular one when calling the function.'
 
+        # Initialize the dictionary which will be returned
+        sim_params = {}
+
         # Check if there is a provided value
         # If not, check if there is at least a default value
-        if 'U' in kwargs:
-            U = kwargs['U']
-        else:
-            if getattr(self, 'U', None) != None:
-                U = self.U
+        for param in self.sim_param_keys:
+            if param in kwargs:
+                sim_params[param] = kwargs[param]
             else:
-                raise Exception(msg.format('U'))
-
-        if 'B' in kwargs:
-            B = kwargs['B']
-        else:
-            if getattr(self, 'B', None) != None:
-                B = self.B
-            else:
-                raise Exception(msg.format('B'))
-
-        if 'delta_t' in kwargs:
-            delta_t = kwargs['delta_t']
-        else:
-            if getattr(self, 'delta_t', None) != None:
-                delta_t = self.delta_t
-            else:
-                raise Exception(msg.format('delta_t'))
-
-        if 'air_dens' in kwargs:
-            air_dens = kwargs['air_dens']
-        else:
-            if getattr(self, 'air_dens', None) != None:
-                air_dens = self.air_dens
-            else:
-                raise Exception(msg.format('air_dens'))
+                if param in self.default_sim_params:
+                    sim_params[param] = self.default_sim_params[param]
+                else:
+                    raise Exception(msg.format(param))
         
         # Return input parameters filled with default values when necessary
-        sim_params = {'U':U, 'B':B, 'delta_t':delta_t, 'air_dens':air_dens}
         return(sim_params)
         
 
@@ -301,7 +275,7 @@ class FlutterDerivatives():
 
         # Fit the sine+cosine function
         # force = a + b*cos(omega*t) + c*sin(omega*t)
-        a, b, c = util.extract_sinusoidal_parameters(time, force, omega=omega, function='sin_cos')
+        _, b, c = util.extract_sinusoidal_parameters(time, force, omega=omega, function='sin_cos')
 
         # Get the names of the derivatives asociated
         # with this particular motion and force directions
