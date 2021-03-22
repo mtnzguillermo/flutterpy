@@ -113,7 +113,7 @@ def base2notation(fd_in, notation_out):
 
 def _check_notation_key(notation_key):
 
-    if notation_key not in available_notations:
+    if notation_key not in available_notations and notation_key != 'base':
         msg = "The notation '" + notation_key + "' is not among the available ones. "
         msg += 'Choose one of the following: ' + str(list(available_notations.keys()))[1:-1] + '.'
         raise Exception(msg)
