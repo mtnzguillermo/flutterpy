@@ -32,7 +32,7 @@ class Notation():
             # Check which base derivatives are in the formula
             base_derivs_needed = []
             for base_deriv in self.base_derivs:
-                if sym.sympify(base_deriv) in formula.free_symbols:
+                if  formula.has(sym.sympify(base_deriv)):
                     base_derivs_needed.append(base_deriv)
 
             # Obtain Ured (x-axis) data
@@ -43,8 +43,8 @@ class Notation():
                 for base_deriv in base_derivs_needed[1:]:
                     if fd_in[base_deriv]['Ured'] != Ureds:
                         msg = "The derivative '" + deriv + "' requires values from "
-                        msg += 'several base derivatives (' + base_derivs_needed + ') '
-                        msg += 'which do not have the same U_red values (x-axis data). '
+                        msg += 'several base derivatives (' + str(base_derivs_needed)[1:-1]
+                        msg += ') which do not have the same U_red values (x-axis data). '
                         msg += 'It is thus impossible to convert the data into the '
                         msg += "'" + self.name + "' notation without losing information."
                         raise Exception(msg)
@@ -52,17 +52,19 @@ class Notation():
             # Calculate the values for each Ured
             for index, Ured in enumerate(Ureds):
 
-                # Create a copy of the sympy expression so the original is kept
-                substituted_formula = formula
-
-                # Substitute the formula
-                substituted_formula.subs(sym.sympify('Ured'), Ured)
+                # Substitute the formula and evaluate
+                deriv_value = formula.subs(sym.sympify('Ured'), Ured)
                 for base_deriv in base_derivs_needed:
                     value = fd_in[base_deriv]['values'][index]
-                    substituted_formula.subs(sym.sympyfy(base_deriv), value)
+                    deriv_value = deriv_value.subs(sym.sympify(base_deriv), value)
+                deriv_value = deriv_value.evalf()
+                
+                # Convert to standard python complex (if it is a complex number)
+                if deriv_value.has(sym.I):
+                    deriv_value = complex(deriv_value)
 
                 # Fill the values of the new derivative
-                fd_out[deriv]['values'].append(substituted_formula.evalf())
+                fd_out[deriv]['values'].append(deriv_value)
             
             # Fill the Ured data
             fd_out[deriv]['Ured'] = Ureds
@@ -113,7 +115,7 @@ def base2notation(fd_in, notation_out):
 
 def _check_notation_key(notation_key):
 
-    if notation_key not in available_notations:
+    if notation_key not in available_notations and notation_key != 'base':
         msg = "The notation '" + notation_key + "' is not among the available ones. "
         msg += 'Choose one of the following: ' + str(list(available_notations.keys()))[1:-1] + '.'
         raise Exception(msg)

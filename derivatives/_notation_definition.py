@@ -32,5 +32,19 @@ notation_settings = [
             'P1': (Ured/2/pi)*d1/2,     'P2': (Ured/2/pi)*d5/2,  'P3': (Ured/2/pi)**2*d6/2,
             'P4': (Ured/2/pi)**2*d2/2,  'P5': (Ured/2/pi)*d3/2,  'P6': (Ured/2/pi)**2*d4/2
         }
+    },
+    {
+        'name':'starossek',
+        'relations':{
+            'c_hh':     Ured/pi**2 * ((Ured/2/pi)*l4 + i*l3),
+            'c_ha': 2 * Ured/pi**2 * ((Ured/2/pi)*l6 + i*l5),
+            'c_hp':     Ured/pi**2 * ((Ured/2/pi)*l2 + i*l1),
+            'c_ah': 2 * Ured/pi**2 * ((Ured/2/pi)*m4 + i*m3),
+            'c_aa': 4 * Ured/pi**2 * ((Ured/2/pi)*m6 + i*m5),
+            'c_ap': 2 * Ured/pi**2 * ((Ured/2/pi)*m2 + i*m1),
+            'c_ph':     Ured/pi**2 * ((Ured/2/pi)*d4 + i*d3),
+            'c_pa': 2 * Ured/pi**2 * ((Ured/2/pi)*d6 + i*d5),
+            'c_pp':     Ured/pi**2 * ((Ured/2/pi)*d2 + i*d1)
+        }
     }
 ]
