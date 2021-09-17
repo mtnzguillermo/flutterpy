@@ -71,6 +71,8 @@ class Notation():
     
     def deconvert(self,fd_in):
 
+        # TODO: implement inverse convert
+
         fd_out = fd_in
 
         return fd_out
