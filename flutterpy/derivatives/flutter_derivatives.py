@@ -2,8 +2,8 @@
 import numpy as np
 import warnings
 
-from . import sinusoidal_utilities as util
-from .notation import notation as ntt
+import flutterpy.derivatives.sinusoidal_utilities as util
+import flutterpy.derivatives.notations as ntt
 
 
 # Main object to manage flutter derivatives data
