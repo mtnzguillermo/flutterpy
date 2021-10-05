@@ -3,7 +3,7 @@ import numpy as np
 import warnings
 
 from . import sinusoidal_utilities as util
-from . import notation as ntt
+from .notation import notation as ntt
 
 
 # Main object to manage flutter derivatives data
