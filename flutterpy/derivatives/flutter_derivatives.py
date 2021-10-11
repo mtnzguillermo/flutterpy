@@ -2,8 +2,9 @@
 import numpy as np
 import warnings
 
-import flutterpy.derivatives.sinusoidal_utilities as util
+import flutterpy.derivatives.calculators.sinusoidal_utilities as util
 import flutterpy.derivatives.notations as ntt
+import flutterpy.derivatives.notations.utilities as not_util
 
 
 # Main object to manage flutter derivatives data
@@ -102,7 +103,7 @@ class FlutterDerivatives():
         if notation == 'base':
             return self.fd_data
         else:
-            fd_data_converted = ntt.base2notation(self.fd_data,notation)
+            fd_data_converted = not_util.base2notation(self.fd_data,notation)
             return fd_data_converted
 
 

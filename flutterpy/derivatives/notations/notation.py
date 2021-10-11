@@ -2,7 +2,7 @@
 import numpy as np
 import sympy as sym
 
-from ._notation_definition import notation_settings
+from flutterpy.derivatives.notations._notation_definition import notation_settings
 
 class Notation():
 
@@ -87,32 +87,6 @@ class Notation():
         pass
 
 
-def notation2notation(fd_in, notation_in, notation_out):
-    
-    fd_base = notation2base(fd_in, notation_in)
-    fd_out = base2notation(fd_base, notation_out)
-
-    return fd_out
-
-
-def notation2base(fd_in, notation_in):
-
-    _check_notation_key(notation_in)
-    
-    fd_out = available_notations[notation_in].deconvert(fd_in)
-    
-    return fd_out
-
-
-def base2notation(fd_in, notation_out):
-
-    _check_notation_key(notation_out)
-    
-    fd_out = available_notations[notation_out].convert(fd_in)
-    
-    return fd_out
-
-
 def _check_notation_key(notation_key):
 
     if notation_key not in available_notations and notation_key != 'base':
@@ -122,5 +96,5 @@ def _check_notation_key(notation_key):
 
 
 available_notations = {}
-for notation in notation_settings:
-    available_notations[notation['name']] = Notation(notation['name'],notation['relations'])
+for nt in notation_settings:
+    available_notations[nt['name']] = Notation(nt['name'],nt['relations'])
