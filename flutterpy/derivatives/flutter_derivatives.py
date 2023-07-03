@@ -283,15 +283,15 @@ class FlutterDerivatives():
         derivs_to_calc = self._get_derivatives_to_calculate(m_name, f_name)
 
         # Calculation of the flutter derivatives
-        #       parameter             factor_0             factor_1      factor_2
-        # l3    b*U/omega   *    2/(dens*U^2*B*ampl)   *      1      *      1
-        # l4       c*B      *    2/(dens*U^2*B*ampl)   *      1      *      1
-        # l5    b*U/omega   *    2/(dens*U^2*B*ampl)   *      1      *     1/B
-        # l6       c*B      *    2/(dens*U^2*B*ampl)   *      1      *     1/B
-        # m3    b*U/omega   *    2/(dens*U^2*B*ampl)   *     1/B     *      1
-        # m4       c*B      *    2/(dens*U^2*B*ampl)   *     1/B     *      1
-        # m5    b*U/omega   *    2/(dens*U^2*B*ampl)   *     1/B     *     1/B
-        # m6       c*B      *    2/(dens*U^2*B*ampl)   *     1/B     *     1/B
+        #       parameter              factor_0             factor_1      factor_2
+        # l3    b*U/omega   *    2/(dens*U^2*B^2*ampl)   *      1      *      1
+        # l4       c*B      *    2/(dens*U^2*B^2*ampl)   *      1      *      1
+        # l5    b*U/omega   *    2/(dens*U^2*B^2*ampl)   *      1      *     1/B
+        # l6       c*B      *    2/(dens*U^2*B^2*ampl)   *      1      *     1/B
+        # m3    b*U/omega   *    2/(dens*U^2*B^2*ampl)   *     1/B     *      1
+        # m4       c*B      *    2/(dens*U^2*B^2*ampl)   *     1/B     *      1
+        # m5    b*U/omega   *    2/(dens*U^2*B^2*ampl)   *     1/B     *     1/B
+        # m6       c*B      *    2/(dens*U^2*B^2*ampl)   *     1/B     *     1/B
         f0 = 2/(sim_params['fluid_dens']*sim_params['U']**2*sim_params['B']**2*motion_ampl)
         if m_name == 'pitch':
             f1= 1/sim_params['B']
